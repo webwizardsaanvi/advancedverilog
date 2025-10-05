@@ -9,12 +9,13 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-Explain how your project works
+Counts 8 bits high, or resets.
+USES A CLOCK YAYAYAY
 
 ## How to test
 
-Explain how to use your project
+use the test bench 
 
 ## External hardware
 
-List external hardware used in your project (e.g. PMOD, LED display, etc), if any
+there's not really anything to put here....
