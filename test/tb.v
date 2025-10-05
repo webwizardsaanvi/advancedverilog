@@ -4,7 +4,7 @@
 /* This testbench just instantiates the module and makes some convenient wires
    that can be driven / tested by the cocotb test.py.
 */
-module tb_tt_um_saanvi_counter ();
+module tb ();
 
 
   // Wire up the inputs and outputs:
@@ -43,7 +43,7 @@ end
  // run for 200ns
 // Dump the signals to a VCD file. You can view it with gtkwave or surfer.
   initial begin
-    $dumpfile("tt_um_saanvi_counter.vcd");
+     $dumpfile("tb.vcd");
     $dumpvars(0, tb_tt_um_saanvi_counter);
     #1;
   end
