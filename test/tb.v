@@ -4,14 +4,8 @@
 /* This testbench just instantiates the module and makes some convenient wires
    that can be driven / tested by the cocotb test.py.
 */
-module tb ();
+module tb_tt_um_saanvi_counter ();
 
-  // Dump the signals to a VCD file. You can view it with gtkwave or surfer.
-  initial begin
-    $dumpfile("tb.vcd");
-    $dumpvars(0, tb);
-    #1;
-  end
 
   // Wire up the inputs and outputs:
   reg clk;
@@ -22,20 +16,9 @@ module tb ();
   wire [7:0] uo_out;
   wire [7:0] uio_out;
   wire [7:0] uio_oe;
-`ifdef GL_TEST
-  wire VPWR = 1'b1;
-  wire VGND = 1'b0;
-`endif
 
   // Replace tt_um_example with your module name:
-  tt_um_example user_project (
-
-      // Include power ports for the Gate Level test:
-`ifdef GL_TEST
-      .VPWR(VPWR),
-      .VGND(VGND),
-`endif
-
+  tt_um_saanvi_counter dut (
       .ui_in  (ui_in),    // Dedicated inputs
       .uo_out (uo_out),   // Dedicated outputs
       .uio_in (uio_in),   // IOs: Input path
@@ -45,5 +28,24 @@ module tb ();
       .clk    (clk),      // clock
       .rst_n  (rst_n)     // not reset
   );
+
+initial clk = 0;
+always #5 clk = ~clk;
+
+initial begin
+    ui_in = 8'd0;
+    uio_in = 8'd0;
+    ena = 1'b1;
+    rst_n = 1'b0;
+    #12 rst_n = 1'b1; // release reset after 12ns
+    #200 $finish;
+end
+ // run for 200ns
+// Dump the signals to a VCD file. You can view it with gtkwave or surfer.
+  initial begin
+    $dumpfile("tt_um_saanvi_counter.vcd");
+    $dumpvars(0, tb_tt_um_saanvi_counter);
+    #1;
+  end
 
 endmodule
